@@ -7,7 +7,7 @@ object Chapter_3 {
     object List {
       def stringfy[A](as: List[A]): String = as match {
         case Nil => ""
-        case Cons(x,xs) => x.toString.concat(" ").concat(stringfy(xs)).trim()
+        case Cons(x,xs) => x.toString + " " + stringfy(xs).trim
       }
 
       def apply[A](as: A*): List[A] =
