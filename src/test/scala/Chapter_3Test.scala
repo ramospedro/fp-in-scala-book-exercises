@@ -6,6 +6,6 @@ class Chapter_3Test extends FlatSpec with Matchers {
     val list = SingleLinkedList.List(10, 20, 30, 40, 50)
     val stringfiedList =SingleLinkedList.List.stringfy(list)
     
-    stringfiedList should be ("10 20 30 40 50");
+    stringfiedList should be ("10, 20, 30, 40, 50");
   }
 }
