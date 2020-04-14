@@ -1,20 +1,7 @@
 import annotation.tailrec
 
 object Chapter_2 {
-  object SingleLinkedList {
-    sealed trait List[A+]
-    object Nil extends List[Nothing]
-    case class Cons[A+](head: A, tail: List[A]): List[A] extends List[A]
-
-    object List {
-      def apply[A+](as: A*) {
-        if (as.isEmpty) Nil
-
-        Cons(as.head, as.tail)
-      }
-    }
-  }
-
+  
   def abs(n: Int) : Int =
     if (n < 0) -n
     else n
