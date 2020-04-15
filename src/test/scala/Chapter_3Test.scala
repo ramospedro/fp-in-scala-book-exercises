@@ -20,4 +20,12 @@ class Chapter_3Test extends FlatSpec with Matchers {
   "tail" should "return an empty list when the list has only one element" in {
     tail(SingleLinkedList.List(10)) should be (SingleLinkedList.Nil)
   }
+
+  "setHead" should "replace the first element in a list" in {
+    setHead(SingleLinkedList.List(10, 20, 30), 0) should be (SingleLinkedList.List(0, 20, 30))
+  }
+
+  "setHead" should "return an empty list if the list is already empty" in {
+    setHead(SingleLinkedList.Nil, 0) should be (SingleLinkedList.Nil)
+  }
 }
