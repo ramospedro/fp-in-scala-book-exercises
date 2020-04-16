@@ -46,6 +46,10 @@ class Chapter_3Test extends FlatSpec with Matchers {
     dropWhile(SingleLinkedList.List(10, 20, 30, 40, 50), (x: Int) => x < 30) should be (SingleLinkedList.List(30, 40, 50))
   }
 
+  "dropWhile" should "drop items from the list as long as they match the the predicate (and maximize type inference for f's parameter)" in {
+    dropWhileCurried(SingleLinkedList.List(10, 20, 30, 40, 50))(x => x < 30) should be (SingleLinkedList.List(30, 40, 50))
+  }
+
   "append" should "append second list in the end of the first list" in {
     append(
       SingleLinkedList.List(10, 20, 30),
@@ -67,5 +71,9 @@ class Chapter_3Test extends FlatSpec with Matchers {
 
   "init3" should "return all but the last element from a list" in {
     init3(SingleLinkedList.List(10, 20, 30, 40, 50)) should be (SingleLinkedList.List(10, 20, 30, 40))
+  }
+
+  "reverse" should "reverse the list" in {
+    reverse(SingleLinkedList.List(10, 20, 30, 40, 50)) should be (SingleLinkedList.List(50, 40, 30, 20, 10))
   }
 }
