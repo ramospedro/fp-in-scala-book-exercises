@@ -76,4 +76,20 @@ class Chapter_3Test extends FlatSpec with Matchers {
   "reverse" should "reverse the list" in {
     reverse(SingleLinkedList.List(10, 20, 30, 40, 50)) should be (SingleLinkedList.List(50, 40, 30, 20, 10))
   }
+
+  "foldRight" should "fold from the right" in {
+    foldRight(SingleLinkedList.List("a", "b", "c", "d", "e"), "x")(_ + _) should be ("abcdex")
+  }
+
+  "foldRight" should "return the initial value if list is empty" in {
+    foldRight(SingleLinkedList.Nil, "x")((x: String, y: String) => x + y) should be ("x")
+  }
+
+  "foldLeft" should "fold from the left" in {
+    foldLeft(SingleLinkedList.List("a", "b", "c", "d", "e"), "x")(_ + _) should be ("xabcde")
+  }
+
+  "foldLeft" should "return the initial value if list is empty" in {
+    foldLeft(SingleLinkedList.Nil, "x")((x: String, y: String) => x + y) should be ("x")
+  }
 }
