@@ -111,5 +111,10 @@ object Chapter_3 {
     //   case _ => 101
     // }
 
+    // 3.7
+    // No. It's not possible, since foldRight transverses all the list
+    // evaluating the inner arguments (which includes de foldRight recursive calls)
+    // and only when the stack is empty, it goes back evaluating the functions itself.
+
   }
 }
