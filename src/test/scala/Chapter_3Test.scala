@@ -93,10 +93,19 @@ class Chapter_3Test extends FlatSpec with Matchers {
     foldLeft(SingleLinkedList.Nil, "x")((x: String, y: String) => x + y) should be ("x")
   }
 
-  "length" should "compute the length of the list" in {
+  "length1" should "compute the length of the list" in {
     length1(SingleLinkedList.List(1, 2, 3, 4, 5)) should be (5)
-    // length(SingleLinkedList.Nil:List[Int]) should be (0)
-    // val as = Cons(1, Cons(2, Nil))
+  }
 
+  "length2" should "compute the length of the list using foldLeft" in {
+    length2(SingleLinkedList.List(1, 2, 3, 4, 5)) should be (5)
+  }
+
+  "sum2" should "compute the sum of a list using foldLeft" in {
+    sum2(SingleLinkedList.List(10, 10, 20, 20)) should be (60)
+  }
+
+  "product2" should "compute the product of a list using foldLeft" in {
+    product2(SingleLinkedList.List(1.0, 2.0, 2.0, 3.0, 4.0)) should be (48.0)
   }
 }
