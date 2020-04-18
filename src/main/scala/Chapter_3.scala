@@ -1,3 +1,5 @@
+import annotation.tailrec
+
 object Chapter_3 {
   object SingleLinkedList {
     sealed trait List[+A]
@@ -96,11 +98,20 @@ object Chapter_3 {
           case Cons(x, xs) => f(x, foldRight(xs, z)(f))
         }
 
-      def foldLeft[A, B](as: List[A], z: B)(f:(B, A) => B): B =
+      @tailrec
+      def foldLeft[A, B](as: List[A], z: B)(f: (B, A) => B): B =
         as match {
           case Nil => z
           case Cons(x, xs) => foldLeft(xs, f(z, x))(f)
         }
+      
+      // when we do this, we simply get the list back itself
+      // because foldRight implementation is basicaly the same thing as the
+      // list constructor
+      def exercise_3_8() = foldRight(List(1,2,3), Nil:List[Int])(Cons(_,_))
+
+      def length1[A](l: List[A]): Int =
+        foldRight(l, 0)((_,acc) => acc + 1)
     }
 
     // val x = List(1,2,3,4,5) match {

@@ -92,4 +92,11 @@ class Chapter_3Test extends FlatSpec with Matchers {
   "foldLeft" should "return the initial value if list is empty" in {
     foldLeft(SingleLinkedList.Nil, "x")((x: String, y: String) => x + y) should be ("x")
   }
+
+  "length" should "compute the length of the list" in {
+    length1(SingleLinkedList.List(1, 2, 3, 4, 5)) should be (5)
+    // length(SingleLinkedList.Nil:List[Int]) should be (0)
+    // val as = Cons(1, Cons(2, Nil))
+
+  }
 }
