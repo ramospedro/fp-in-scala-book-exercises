@@ -130,6 +130,12 @@ object Chapter_3 {
        
       def foldRightViaFoldLeft[A, B](as: List[A], z: B)(f: (A, B) => B): B =
         foldLeft(reverse(as), z)((b, a) => f(a, b))
+      
+      def appendFoldRight[A](a1: List[A], a2: List[A]): List[A] = 
+        foldRight(a1, a2)(Cons(_,_))
+      
+      def flatten[A](l: List[List[A]]): List[A] =
+        foldRight(l, Nil:List[A])(append)
 
     // val x = List(1,2,3,4,5) match {
     //   case Cons(x, Cons(2, Cons(4, _))) => x

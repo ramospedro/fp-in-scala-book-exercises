@@ -120,4 +120,19 @@ class Chapter_3Test extends FlatSpec with Matchers {
   "foldRightViaFoldLeft" should "fold right the list via foldLeft" in {
     foldRightViaFoldLeft(SingleLinkedList.List("a", "b", "c", "d", "e"), "x")(_ + _) should be ("abcdex")
   }
+
+  "appendFoldRight" should "append second list in the end of the first list using foldRight" in {
+    appendFoldRight(
+      SingleLinkedList.List(10, 20, 30),
+      SingleLinkedList.List(40, 50, 60)
+    ) should be (SingleLinkedList.List(10, 20, 30, 40, 50, 60))
+  }
+
+  "flatten" should "convert a list of lists into a single list" in {
+    flatten(SingleLinkedList.List(
+      SingleLinkedList.List(1, 2, 3, 4),
+      SingleLinkedList.List(5, 6, 7, 8),
+      SingleLinkedList.List(9, 10, 11, 12)
+    )) should be (SingleLinkedList.List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12))
+  }
 }
