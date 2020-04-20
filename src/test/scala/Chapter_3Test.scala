@@ -108,4 +108,16 @@ class Chapter_3Test extends FlatSpec with Matchers {
   "product2" should "compute the product of a list using foldLeft" in {
     product2(SingleLinkedList.List(1.0, 2.0, 2.0, 3.0, 4.0)) should be (48.0)
   }
+
+  "reverseFoldLeft" should "reverse the list using foldLeft" in {
+    reverseFoldLeft(SingleLinkedList.List(10, 20, 30, 40, 50)) should be (SingleLinkedList.List(50, 40, 30, 20, 10))
+  }
+
+  "foldLeftViaFoldRight" should "fold left the list via foldRight" in {
+    foldLeftViaFoldRight(SingleLinkedList.List("a", "b", "c", "d", "e"), "x")(_ + _) should be ("xabcde")
+  }
+
+  "foldRightViaFoldLeft" should "fold right the list via foldLeft" in {
+    foldRightViaFoldLeft(SingleLinkedList.List("a", "b", "c", "d", "e"), "x")(_ + _) should be ("abcdex")
+  }
 }

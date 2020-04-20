@@ -121,7 +121,15 @@ object Chapter_3 {
 
       def product2(l: List[Double]): Double =
         foldLeft(l, 1.0)(_ * _)
-    }
+
+      def reverseFoldLeft[A](l: List[A]) =
+        foldLeft(l, Nil:List[A])((acc, x) => Cons(x, acc))
+      
+      def foldLeftViaFoldRight[A, B](as: List[A], z: B)(f: (B, A) => B): B =
+        foldRight(reverse(as), z)((a: A, b: B) => f(b, a))
+       
+      def foldRightViaFoldLeft[A, B](as: List[A], z: B)(f: (A, B) => B): B =
+        foldLeft(reverse(as), z)((b, a) => f(a, b))
 
     // val x = List(1,2,3,4,5) match {
     //   case Cons(x, Cons(2, Cons(4, _))) => x
@@ -135,6 +143,6 @@ object Chapter_3 {
     // No. It's not possible, since foldRight transverses all the list
     // evaluating the inner arguments (which includes de foldRight recursive calls)
     // and only when the stack is empty, it goes back evaluating the functions itself.
-
+    }
   }
 }
