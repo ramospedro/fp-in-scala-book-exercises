@@ -133,9 +133,42 @@ object Chapter_3 {
       
       def appendFoldRight[A](a1: List[A], a2: List[A]): List[A] = 
         foldRight(a1, a2)(Cons(_,_))
-      
+
       def flatten[A](l: List[List[A]]): List[A] =
-        foldRight(l, Nil:List[A])(append)
+        foldLeft(l, Nil:List[A])(append)
+      
+      def addOne(l: List[Int]): List[Int] =
+        foldRight(l, Nil:List[Int])((h, t) => Cons(h + 1, t))
+      
+      def doubleToString(l: List[Double]): List[String] =
+        foldRight(l, Nil:List[String])((h, t) => Cons(h.toString, t))
+
+      def mapViaFoldRigh[A,B](as: List[A])(f: A => B): List[B] =
+        foldRightViaFoldLeft(as, Nil:List[B])((h, t) => Cons(f(h), t))
+
+      def map[A,B](l: List[A])(f: A => B): List[B] = {
+        val buf = new scala.collection.mutable.ListBuffer[B]
+        @tailrec
+        def loop(l: List[A]): Unit = l match {
+          case Nil => Nil
+          case Cons(h, t) => buf += f(h); loop(t)
+        }
+        loop(l)
+        List(buf.toList: _*)
+      }
+
+      def filterViaFoldRight[A](as: List[A])(f: A => Boolean): List[A] =
+        foldRightViaFoldLeft(as, Nil:List[A])((h, t) => if (f(h)) Cons(h, t) else t)
+
+      def filter[A](l: List[A])(f: A => Boolean): List[A] = {
+        val buf = new scala.collection.mutable.ListBuffer[A]
+        def loop(l: List[A]): Unit = l match {
+          case Nil => Nil
+          case Cons(h, t) => if (f(h)) buf += h; loop(t)
+        }
+        loop(l)
+        List(buf.toList: _*)
+      }
 
     // val x = List(1,2,3,4,5) match {
     //   case Cons(x, Cons(2, Cons(4, _))) => x

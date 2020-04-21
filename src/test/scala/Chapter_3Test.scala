@@ -135,4 +135,26 @@ class Chapter_3Test extends FlatSpec with Matchers {
       SingleLinkedList.List(9, 10, 11, 12)
     )) should be (SingleLinkedList.List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12))
   }
+
+  "addOne" should "add 1 to each element in a list of integers" in {
+    addOne(SingleLinkedList.List(1, 2, 3)) should be (SingleLinkedList.List(2, 3, 4))
+  }
+
+  "doubleToString" should "convert a list of double to a list of string" in {
+    doubleToString(
+      SingleLinkedList.List(1.0, 2.0, 3.0, 4.1, 5.2)) should be (SingleLinkedList.List("1.0", "2.0", "3.0", "4.1", "5.2"))
+  }
+
+  "mapViaFoldRigh" should "modify each element by applying the given function" in {
+    mapViaFoldRigh(SingleLinkedList.List(1, 2, 3, 4, 5))( _ * 2) should be (SingleLinkedList.List(2, 4, 6, 8, 10))
+  }
+
+  "map" should "modify each element by applying the given function while being stack safe" in {
+    map(SingleLinkedList.List(1, 2, 3, 4, 5))(_ * 2) should be (SingleLinkedList.List(2, 4, 6, 8, 10))
+  }
+
+  "filter" should "remove all elements from a list that dont satisfy the predicate" in {
+    filterViaFoldRight(SingleLinkedList.List(1, 2, 3, 4, 5))(_ % 2 == 0) should be (SingleLinkedList.List(2, 4))
+    filter(SingleLinkedList.List(1, 2, 3, 4, 5))(_ % 2 == 0) should be (SingleLinkedList.List(2, 4))
+  }
 }
