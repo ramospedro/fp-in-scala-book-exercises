@@ -1,7 +1,7 @@
 import annotation.tailrec
 
 object Chapter_3 {
-  object SingleLinkedList {
+  object SinglyLinkedList {
     sealed trait List[+A]
     object Nil extends List[Nothing]
     case class Cons[+A](head: A, tail: List[A]) extends List[A]

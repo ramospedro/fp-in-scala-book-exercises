@@ -1,160 +1,160 @@
 import org.scalatest._
 import Chapter_3._
-import Chapter_3.SingleLinkedList.List._
+import Chapter_3.SinglyLinkedList.List._
 
 class Chapter_3Test extends FlatSpec with Matchers {
   "list" should "put the items in the exact order as they are passed" in {
-    val list = SingleLinkedList.List(10, 20, 30, 40, 50)
+    val list = SinglyLinkedList.List(10, 20, 30, 40, 50)
     stringfy(list) should be ("10, 20, 30, 40, 50");
   }
 
   "tail" should "remove the first element from the list" in {
-    val list = SingleLinkedList.List(10, 20, 30, 40, 50)
-    tail(list) should be (SingleLinkedList.List(20, 30, 40, 50))
+    val list = SinglyLinkedList.List(10, 20, 30, 40, 50)
+    tail(list) should be (SinglyLinkedList.List(20, 30, 40, 50))
   }
 
   "tail" should "return an empty list if the list is already empty" in {
-    an [Exception] should be thrownBy (tail(SingleLinkedList.Nil))
+    an [Exception] should be thrownBy (tail(SinglyLinkedList.Nil))
   }
 
   "tail" should "return an empty list when the list has only one element" in {
-    tail(SingleLinkedList.List(10)) should be (SingleLinkedList.Nil)
+    tail(SinglyLinkedList.List(10)) should be (SinglyLinkedList.Nil)
   }
 
   "setHead" should "replace the first element in a list" in {
-    setHead(SingleLinkedList.List(10, 20, 30), 0) should be (SingleLinkedList.List(0, 20, 30))
+    setHead(SinglyLinkedList.List(10, 20, 30), 0) should be (SinglyLinkedList.List(0, 20, 30))
   }
 
   "setHead" should "throw and exception if the list is empty" in {
-    an [Exception] should be thrownBy (setHead(SingleLinkedList.Nil, 0))
+    an [Exception] should be thrownBy (setHead(SinglyLinkedList.Nil, 0))
   }
 
   "drop" should "remove the first n elements from a list" in {
-    drop(SingleLinkedList.List(10, 20, 30, 40, 50, 60, 70, 80), 4) should be (SingleLinkedList.List(50, 60, 70, 80))
+    drop(SinglyLinkedList.List(10, 20, 30, 40, 50, 60, 70, 80), 4) should be (SinglyLinkedList.List(50, 60, 70, 80))
   }
 
   "drop" should "return an empty list if the list was already empty" in {
-    drop(SingleLinkedList.Nil, 2) should be (SingleLinkedList.Nil)
+    drop(SinglyLinkedList.Nil, 2) should be (SinglyLinkedList.Nil)
   }
 
   "drop" should "return an empty list if n is equal or greater than the list length" in {
-    drop(SingleLinkedList.List(10, 20, 30), 3) should be (SingleLinkedList.Nil)
-    drop(SingleLinkedList.List(10, 20), 3) should be (SingleLinkedList.Nil)
+    drop(SinglyLinkedList.List(10, 20, 30), 3) should be (SinglyLinkedList.Nil)
+    drop(SinglyLinkedList.List(10, 20), 3) should be (SinglyLinkedList.Nil)
   }
 
   "dropWhile" should "drop items from the list as long as they match the the predicate" in {
-    dropWhile(SingleLinkedList.List(10, 20, 30, 40, 50), (x: Int) => x < 30) should be (SingleLinkedList.List(30, 40, 50))
+    dropWhile(SinglyLinkedList.List(10, 20, 30, 40, 50), (x: Int) => x < 30) should be (SinglyLinkedList.List(30, 40, 50))
   }
 
   "dropWhile" should "drop items from the list as long as they match the the predicate (and maximize type inference for f's parameter)" in {
-    dropWhileCurried(SingleLinkedList.List(10, 20, 30, 40, 50))(x => x < 30) should be (SingleLinkedList.List(30, 40, 50))
+    dropWhileCurried(SinglyLinkedList.List(10, 20, 30, 40, 50))(x => x < 30) should be (SinglyLinkedList.List(30, 40, 50))
   }
 
   "append" should "append second list in the end of the first list" in {
     append(
-      SingleLinkedList.List(10, 20, 30),
-      SingleLinkedList.List(40, 50, 60)
-    ) should be (SingleLinkedList.List(10, 20, 30, 40, 50, 60))
+      SinglyLinkedList.List(10, 20, 30),
+      SinglyLinkedList.List(40, 50, 60)
+    ) should be (SinglyLinkedList.List(10, 20, 30, 40, 50, 60))
   }
 
   "init" should "return all but the last element from a list" in {
-    init(SingleLinkedList.List(10, 20, 30, 40, 50)) should be (SingleLinkedList.List(10, 20, 30, 40))
+    init(SinglyLinkedList.List(10, 20, 30, 40, 50)) should be (SinglyLinkedList.List(10, 20, 30, 40))
   }
 
   "init" should "throw and exception if the list is empty" in {
-    an [Exception] should be thrownBy (init(SingleLinkedList.Nil))
+    an [Exception] should be thrownBy (init(SinglyLinkedList.Nil))
   }
 
   "init2" should "return all but the last element from a list" in {
-    init2(SingleLinkedList.List(10, 20, 30, 40, 50)) should be (SingleLinkedList.List(10, 20, 30, 40))
+    init2(SinglyLinkedList.List(10, 20, 30, 40, 50)) should be (SinglyLinkedList.List(10, 20, 30, 40))
   }
 
   "init3" should "return all but the last element from a list" in {
-    init3(SingleLinkedList.List(10, 20, 30, 40, 50)) should be (SingleLinkedList.List(10, 20, 30, 40))
+    init3(SinglyLinkedList.List(10, 20, 30, 40, 50)) should be (SinglyLinkedList.List(10, 20, 30, 40))
   }
 
   "reverse" should "reverse the list" in {
-    reverse(SingleLinkedList.List(10, 20, 30, 40, 50)) should be (SingleLinkedList.List(50, 40, 30, 20, 10))
+    reverse(SinglyLinkedList.List(10, 20, 30, 40, 50)) should be (SinglyLinkedList.List(50, 40, 30, 20, 10))
   }
 
   "foldRight" should "fold from the right" in {
-    foldRight(SingleLinkedList.List("a", "b", "c", "d", "e"), "x")(_ + _) should be ("abcdex")
+    foldRight(SinglyLinkedList.List("a", "b", "c", "d", "e"), "x")(_ + _) should be ("abcdex")
   }
 
   "foldRight" should "return the initial value if list is empty" in {
-    foldRight(SingleLinkedList.Nil, "x")((x: String, y: String) => x + y) should be ("x")
+    foldRight(SinglyLinkedList.Nil, "x")((x: String, y: String) => x + y) should be ("x")
   }
 
   "foldLeft" should "fold from the left" in {
-    foldLeft(SingleLinkedList.List("a", "b", "c", "d", "e"), "x")(_ + _) should be ("xabcde")
+    foldLeft(SinglyLinkedList.List("a", "b", "c", "d", "e"), "x")(_ + _) should be ("xabcde")
   }
 
   "foldLeft" should "return the initial value if list is empty" in {
-    foldLeft(SingleLinkedList.Nil, "x")((x: String, y: String) => x + y) should be ("x")
+    foldLeft(SinglyLinkedList.Nil, "x")((x: String, y: String) => x + y) should be ("x")
   }
 
   "length1" should "compute the length of the list" in {
-    length1(SingleLinkedList.List(1, 2, 3, 4, 5)) should be (5)
+    length1(SinglyLinkedList.List(1, 2, 3, 4, 5)) should be (5)
   }
 
   "length2" should "compute the length of the list using foldLeft" in {
-    length2(SingleLinkedList.List(1, 2, 3, 4, 5)) should be (5)
+    length2(SinglyLinkedList.List(1, 2, 3, 4, 5)) should be (5)
   }
 
   "sum2" should "compute the sum of a list using foldLeft" in {
-    sum2(SingleLinkedList.List(10, 10, 20, 20)) should be (60)
+    sum2(SinglyLinkedList.List(10, 10, 20, 20)) should be (60)
   }
 
   "product2" should "compute the product of a list using foldLeft" in {
-    product2(SingleLinkedList.List(1.0, 2.0, 2.0, 3.0, 4.0)) should be (48.0)
+    product2(SinglyLinkedList.List(1.0, 2.0, 2.0, 3.0, 4.0)) should be (48.0)
   }
 
   "reverseFoldLeft" should "reverse the list using foldLeft" in {
-    reverseFoldLeft(SingleLinkedList.List(10, 20, 30, 40, 50)) should be (SingleLinkedList.List(50, 40, 30, 20, 10))
+    reverseFoldLeft(SinglyLinkedList.List(10, 20, 30, 40, 50)) should be (SinglyLinkedList.List(50, 40, 30, 20, 10))
   }
 
   "foldLeftViaFoldRight" should "fold left the list via foldRight" in {
-    foldLeftViaFoldRight(SingleLinkedList.List("a", "b", "c", "d", "e"), "x")(_ + _) should be ("xabcde")
+    foldLeftViaFoldRight(SinglyLinkedList.List("a", "b", "c", "d", "e"), "x")(_ + _) should be ("xabcde")
   }
 
   "foldRightViaFoldLeft" should "fold right the list via foldLeft" in {
-    foldRightViaFoldLeft(SingleLinkedList.List("a", "b", "c", "d", "e"), "x")(_ + _) should be ("abcdex")
+    foldRightViaFoldLeft(SinglyLinkedList.List("a", "b", "c", "d", "e"), "x")(_ + _) should be ("abcdex")
   }
 
   "appendFoldRight" should "append second list in the end of the first list using foldRight" in {
     appendFoldRight(
-      SingleLinkedList.List(10, 20, 30),
-      SingleLinkedList.List(40, 50, 60)
-    ) should be (SingleLinkedList.List(10, 20, 30, 40, 50, 60))
+      SinglyLinkedList.List(10, 20, 30),
+      SinglyLinkedList.List(40, 50, 60)
+    ) should be (SinglyLinkedList.List(10, 20, 30, 40, 50, 60))
   }
 
   "flatten" should "convert a list of lists into a single list" in {
-    flatten(SingleLinkedList.List(
-      SingleLinkedList.List(1, 2, 3, 4),
-      SingleLinkedList.List(5, 6, 7, 8),
-      SingleLinkedList.List(9, 10, 11, 12)
-    )) should be (SingleLinkedList.List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12))
+    flatten(SinglyLinkedList.List(
+      SinglyLinkedList.List(1, 2, 3, 4),
+      SinglyLinkedList.List(5, 6, 7, 8),
+      SinglyLinkedList.List(9, 10, 11, 12)
+    )) should be (SinglyLinkedList.List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12))
   }
 
   "addOne" should "add 1 to each element in a list of integers" in {
-    addOne(SingleLinkedList.List(1, 2, 3)) should be (SingleLinkedList.List(2, 3, 4))
+    addOne(SinglyLinkedList.List(1, 2, 3)) should be (SinglyLinkedList.List(2, 3, 4))
   }
 
   "doubleToString" should "convert a list of double to a list of string" in {
     doubleToString(
-      SingleLinkedList.List(1.0, 2.0, 3.0, 4.1, 5.2)) should be (SingleLinkedList.List("1.0", "2.0", "3.0", "4.1", "5.2"))
+      SinglyLinkedList.List(1.0, 2.0, 3.0, 4.1, 5.2)) should be (SinglyLinkedList.List("1.0", "2.0", "3.0", "4.1", "5.2"))
   }
 
   "mapViaFoldRigh" should "modify each element by applying the given function" in {
-    mapViaFoldRigh(SingleLinkedList.List(1, 2, 3, 4, 5))( _ * 2) should be (SingleLinkedList.List(2, 4, 6, 8, 10))
+    mapViaFoldRigh(SinglyLinkedList.List(1, 2, 3, 4, 5))( _ * 2) should be (SinglyLinkedList.List(2, 4, 6, 8, 10))
   }
 
   "map" should "modify each element by applying the given function while being stack safe" in {
-    map(SingleLinkedList.List(1, 2, 3, 4, 5))(_ * 2) should be (SingleLinkedList.List(2, 4, 6, 8, 10))
+    map(SinglyLinkedList.List(1, 2, 3, 4, 5))(_ * 2) should be (SinglyLinkedList.List(2, 4, 6, 8, 10))
   }
 
   "filter" should "remove all elements from a list that dont satisfy the predicate" in {
-    filterViaFoldRight(SingleLinkedList.List(1, 2, 3, 4, 5))(_ % 2 == 0) should be (SingleLinkedList.List(2, 4))
-    filter(SingleLinkedList.List(1, 2, 3, 4, 5))(_ % 2 == 0) should be (SingleLinkedList.List(2, 4))
+    filterViaFoldRight(SinglyLinkedList.List(1, 2, 3, 4, 5))(_ % 2 == 0) should be (SinglyLinkedList.List(2, 4))
+    filter(SinglyLinkedList.List(1, 2, 3, 4, 5))(_ % 2 == 0) should be (SinglyLinkedList.List(2, 4))
   }
 }
