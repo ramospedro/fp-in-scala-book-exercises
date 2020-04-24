@@ -1,7 +1,7 @@
 import annotation.tailrec
 
 object Chapter_3 {
-  object SinglyLinkedList {
+  object SLL {
     sealed trait List[+A]
     object Nil extends List[Nothing]
     case class Cons[+A](head: A, tail: List[A]) extends List[A]
@@ -134,7 +134,7 @@ object Chapter_3 {
       def appendFoldRight[A](a1: List[A], a2: List[A]): List[A] = 
         foldRight(a1, a2)(Cons(_,_))
 
-      def flatten[A](l: List[List[A]]): List[A] =
+      def concat[A](l: List[List[A]]): List[A] =
         foldLeft(l, Nil:List[A])(append)
       
       def addOne(l: List[Int]): List[Int] =
@@ -169,6 +169,36 @@ object Chapter_3 {
         loop(l)
         List(buf.toList: _*)
       }
+
+      def filterViaFlatMap[A](l: List[A])(f: A => Boolean): List[A] =
+        flatMap(l)(a => if (f(a)) List(a) else Nil)
+
+      def flatMapViaFoldRight[A,B](as: List[A])(f: A => List[B]): List[B] =
+        foldRightViaFoldLeft(as, Nil:List[B])((h, t) => append(f(h), t))
+
+      def flatMapViaConcat[A,B](l: List[A])(f: A => List[B]): List[B] =
+        concat(map(l)(f))
+
+      def flatMap[A,B](as: List[A])(f: A => List[B]): List[B] = {
+        var buf = new scala.collection.mutable.ListBuffer[B]
+        
+        @tailrec
+        def visit(l: List[B])(f: B => Unit): Unit = l match {
+          case Nil => Nil
+          case Cons(h,t) => f(h); visit(t)(f)
+        }
+
+        @tailrec
+        def loop(l: List[A]): Unit = l match {
+          case Nil => Nil
+          case Cons(h,t) => visit(f(h))(buf += _); loop(t)
+        }
+        loop(as)
+        List(buf.toList: _*)
+      }
+
+      def zipSum(as: List[Int], bs: List[Int]): List[Int] =
+        Nil
 
     // val x = List(1,2,3,4,5) match {
     //   case Cons(x, Cons(2, Cons(4, _))) => x
