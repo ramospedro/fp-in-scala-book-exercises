@@ -1,7 +1,21 @@
 
 
 object Main extends App {
-  println(Chapter_2.formatResult("double", 4, (n: Int) => n * 2))
+  println(fizzBuzz(20))
+
+  def fizzBuzz(limit: Int): List[String] = {
+    def loop(curr: Int, res: List[String]): List[String] = {
+      def v =
+        if (curr % 15 == 0) "fizzbuzz"
+        else if (curr % 3 == 0) "fizz"
+        else if (curr % 5 == 0) "buzz"
+        else curr.toString
+      
+      if (curr == limit) res :+ v
+      else loop(curr + 1, res :+ v)
+    }
+    loop(1, List[String]())
+  }
 }
 
 object Transversables {

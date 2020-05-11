@@ -197,9 +197,50 @@ object Chapter_3 {
         List(buf.toList: _*)
       }
 
-      def zipSum(as: List[Int], bs: List[Int]): List[Int] =
-        Nil
+      def addPairwise(as: List[Int], bs: List[Int]): List[Int] = (as, bs) match {
+        case (_, Nil) => Nil
+        case (Nil, _) => Nil
+        case (Cons(x, xs), Cons(y, ys)) => Cons(x + y, addPairwise(xs, ys))
+      }
 
+      def zipWith[A,B,C](as: List[A], bs: List[B])(f: (A, B) => C): List[C] = (as, bs) match {
+        case (Nil, _) => Nil
+        case (_, Nil) => Nil
+        case (Cons(h1, t1), Cons(h2, t2)) => Cons(f(h1, h2), zipWith(t1, t2)(f))
+      }
+
+      def zipWithTailRecursive[A,B,C](as: List[A], bs: List[B])(f: (A, B) => C): List[C] = {
+        val buf = new scala.collection.mutable.ListBuffer[C]
+
+        @tailrec
+        def loop(l1: List[A], l2: List[B]): Unit = (l1, l2) match {
+          case (Nil, _) => Nil
+          case (_, Nil) => Nil
+          case (Cons(h1, t1), Cons(h2, t2)) => buf += f(h1, h2); loop(t1, t2)
+        }
+        loop(as, bs)
+        List(buf.toList: _*)
+      }
+
+      def hasSubsequence[A](as: List[A], seq: List[A]): Boolean = {
+        @tailrec
+        def loop(l: List[A], seqRest: List[A]): Boolean = (l, seqRest) match {
+          case (_, Nil) => true
+          case (Nil, _) => false
+          case (Cons(h1, t1), Cons(h2, t2)) if h1 != h2 => loop(t1, seq)
+          case (Cons(h1, t1), Cons(h2, t2)) if h1 == h2 => loop(t1, t2)
+        }
+        loop(as, seq)
+      }
+
+      def hasSubsequenceClever[A](l: List[A], seq: List[A]): Boolean = {
+        if (foldLeft(zipWith(seq, l)(_ == _), true)(_ && _) == true) true
+        else l match {
+          case Nil => false
+          case Cons(h, t) => hasSubsequenceClever(t, seq)
+        }
+      }
+      
     // val x = List(1,2,3,4,5) match {
     //   case Cons(x, Cons(2, Cons(4, _))) => x
     //   case Nil => 42

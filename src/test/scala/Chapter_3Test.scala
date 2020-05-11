@@ -165,7 +165,24 @@ class Chapter_3Test extends FlatSpec with Matchers {
     flatMapViaConcat(SLL.List(1,2,3))(i => SLL.List(i,i)) should be (SLL.List(1,1,2,2,3,3))
   }
 
-   "zipSum" should "zip two lists adding the corresponding elements" in {
-     zipSum(SLL.List(1, 2, 3), SLL.List(4, 5, 6)) should be (SLL.List(5, 7, 9))
-   }
+  "addPairwise" should "zip two lists adding the corresponding elements" in {
+    addPairwise(SLL.List(1, 2, 3), SLL.List(4, 5, 6)) should be (SLL.List(5, 7, 9))
+    addPairwise(SLL.List(1, 2, 3, 4), SLL.List(4, 5, 6)) should be (SLL.List(5, 7, 9))
+    addPairwise(SLL.List(1, 2, 3), SLL.List(4, 5, 6, 4)) should be (SLL.List(5, 7, 9))
+  }
+
+  "zipWith" should "zip two lists applying the function to the corresponding elements" in {
+    zipWith(SLL.List(1, 2, 3), SLL.List(4, 5, 6))((x, y) => x + y) should be (SLL.List(5, 7, 9))
+    zipWith(SLL.List(1, 2, 3, 4), SLL.List(4, 5, 6))((x, y) => x + y) should be (SLL.List(5, 7, 9))
+    zipWith(SLL.List(1, 2, 3), SLL.List(4, 5, 6, 4))((x, y) => x + y) should be (SLL.List(5, 7, 9))
+    
+    zipWithTailRecursive(SLL.List(1, 2, 3), SLL.List(4, 5, 6))((x, y) => x + y) should be (SLL.List(5, 7, 9))
+    zipWithTailRecursive(SLL.List(1, 2, 3, 4), SLL.List(4, 5, 6))((x, y) => x + y) should be (SLL.List(5, 7, 9))
+    zipWithTailRecursive(SLL.List(1, 2, 3), SLL.List(4, 5, 6, 4))((x, y) => x + y) should be (SLL.List(5, 7, 9))
+  }
+
+  "hasSubsequence" should "identify the subsequence inside the list" in {
+    hasSubsequence(SLL.List(1, 2, 3, 4, 5), SLL.List(2, 3, 4)) should be (true)
+    hasSubsequenceClever(SLL.List(1, 2, 3, 4, 5), SLL.List(2, 3, 4)) should be (true)
+  }
 }
