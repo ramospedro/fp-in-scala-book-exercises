@@ -181,8 +181,25 @@ class Chapter_3Test extends FlatSpec with Matchers {
     zipWithTailRecursive(SLL.List(1, 2, 3), SLL.List(4, 5, 6, 4))((x, y) => x + y) should be (SLL.List(5, 7, 9))
   }
 
-  "hasSubsequence" should "identify the subsequence inside the list" in {
+  "startsWith" should "inform wether a list starts with another" in {
+    startsWith(SLL.List(1, 2, 3, 4, 5), SLL.List(1, 2, 3)) should be (true)
+    startsWith(SLL.List(1, 2, 3, 4, 5), SLL.List(2, 3)) should be (false)
+    startsWith(SLL.Nil, SLL.Nil) should be (true)
+  }
+
+  "hasSubsequence" should "return true when the subsequence exists inside the supersequence" in {
+    hasSubsequence(SLL.List(1, 2, 3, 4, 5), SLL.List(2, 2, 4)) should be (false)
+  }
+  
+  "hasSubsequence" should "return false when the subsequence doesn't exist inside the supersequence" in {
     hasSubsequence(SLL.List(1, 2, 3, 4, 5), SLL.List(2, 3, 4)) should be (true)
-    hasSubsequenceClever(SLL.List(1, 2, 3, 4, 5), SLL.List(2, 3, 4)) should be (true)
+  }
+
+  "hasSubsequence" should "return true when the subsequence is empty for non-empty supersequences" in {
+    hasSubsequence(SLL.List(1, 2), SLL.Nil) should be (true)
+  }
+
+  "hasSubsequence" should "return true when the subsequence is Nil for empty supersequences" in {
+    hasSubsequence(SLL.Nil, SLL.Nil) should be (true)
   }
 }

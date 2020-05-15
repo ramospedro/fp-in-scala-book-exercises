@@ -222,23 +222,18 @@ object Chapter_3 {
         List(buf.toList: _*)
       }
 
-      def hasSubsequence[A](as: List[A], seq: List[A]): Boolean = {
-        @tailrec
-        def loop(l: List[A], seqRest: List[A]): Boolean = (l, seqRest) match {
+      @tailrec
+      def startsWith[A](l: List[A], prefix: List[A]): Boolean = (l, prefix) match {
           case (_, Nil) => true
-          case (Nil, _) => false
-          case (Cons(h1, t1), Cons(h2, t2)) if h1 != h2 => loop(t1, seq)
-          case (Cons(h1, t1), Cons(h2, t2)) if h1 == h2 => loop(t1, t2)
-        }
-        loop(as, seq)
+          case (Cons(h1, t1), Cons(h2, t2)) if h1 == h2 => startsWith(t1, t2)
+          case _ => false
       }
 
-      def hasSubsequenceClever[A](l: List[A], seq: List[A]): Boolean = {
-        if (foldLeft(zipWith(seq, l)(_ == _), true)(_ && _) == true) true
-        else l match {
-          case Nil => false
-          case Cons(h, t) => hasSubsequenceClever(t, seq)
-        }
+      @tailrec
+      def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = sup match {
+        case Nil => sub == Nil
+        case _ if startsWith(sup, sub) => true
+        case Cons(h, t) => hasSubsequence(t, sub)
       }
       
     // val x = List(1,2,3,4,5) match {
