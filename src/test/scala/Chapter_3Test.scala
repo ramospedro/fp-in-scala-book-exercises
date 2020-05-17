@@ -1,9 +1,10 @@
-import org.scalatest._
+import org.scalatest.matchers.should._
+import org.scalatest.flatspec.AnyFlatSpec
 import Chapter_3._
 import Chapter_3.SLL.List._
 import Chapter_3.BinaryTree._
 
-class Chapter_3Test extends FlatSpec with Matchers {
+class Chapter_3Test extends AnyFlatSpec with Matchers {
   "list" should "put the items in the exact order as they are passed" in {
     val list = SLL.List(10, 20, 30, 40, 50)
     stringfy(list) should be("10, 20, 30, 40, 50");

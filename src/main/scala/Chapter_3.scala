@@ -1,6 +1,4 @@
 import annotation.tailrec
-import Chapter_3.BinaryTree.Leaf
-import Chapter_3.BinaryTree.Branch
 
 object Chapter_3 {
   object SLL {
