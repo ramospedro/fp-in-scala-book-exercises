@@ -2,6 +2,7 @@
 import scala.{Option => _, Either => _, _}
 
 object Chapter_4 {
+
   sealed trait Option[+A] {
     def map[B](f: A => B): Option[B] = this match {
       case None    => None
@@ -24,5 +25,14 @@ object Chapter_4 {
 
   case class Some[+A](get: A) extends Option[A]
   case object None extends Option[Nothing]
+
+  def mean(xs: Seq[Double]): Option[Double] =
+    if (xs.isEmpty) None
+    else Some(xs.sum / xs.length)
+
+  def variance(xs: Seq[Double]): Option[Double] =
+    mean(xs) flatMap (
+        m => mean(xs.map(x => math.pow(x - m, 2)))
+    )
 
 }

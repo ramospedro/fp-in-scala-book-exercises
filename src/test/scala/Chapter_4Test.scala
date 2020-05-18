@@ -45,4 +45,21 @@ class Chapter_4Test extends AnyFlatSpec with Matchers {
     val noneValue: Option[Int] = None
     noneValue.filter(_ => true) should be(None)
   }
+
+  "variance" should "calculate the variance of the numbers" in {
+
+    /*
+    If the mean of a sequence is m, the variance is the mean of math.pow(x - m, 2)
+    for each element x in the sequence.
+
+    2 5 10 8 | mean = 6.25
+
+    (2 - 6.25) ^ 2 = 18.0625 | (5 - 6.25) ^ 2 = 1.5625 | (10 - 6.25) ^ 2 = 14.0625 | (8 - 6.25) ^ 2 = 3.0625
+
+    mean = 9.1875 | variance = 9.1875
+     */
+
+    variance(Seq(2, 5, 10, 8)) should be(Some(9.1875))
+
+  }
 }
