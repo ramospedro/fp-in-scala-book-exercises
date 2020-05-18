@@ -60,6 +60,9 @@ class Chapter_4Test extends AnyFlatSpec with Matchers {
      */
 
     variance(Seq(2, 5, 10, 8)) should be(Some(9.1875))
+  }
 
+  "variance" should "return None if the list is empty" in {
+    variance(Nil: Seq[Double]) should be(None)
   }
 }

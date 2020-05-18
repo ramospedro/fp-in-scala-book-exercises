@@ -34,5 +34,4 @@ object Chapter_4 {
     mean(xs) flatMap (
         m => mean(xs.map(x => math.pow(x - m, 2)))
     )
-
 }
