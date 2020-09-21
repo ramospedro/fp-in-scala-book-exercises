@@ -1,7 +1,7 @@
 import org.scalatest._
 import org.scalatest.matchers.should._
 import org.scalatest.flatspec.AnyFlatSpec
-
+import scala.math._
 import Chapter_4._
 
 class Chapter_4Test extends AnyFlatSpec with Matchers {
@@ -64,5 +64,26 @@ class Chapter_4Test extends AnyFlatSpec with Matchers {
 
   "variance" should "return None if the list is empty" in {
     variance(Nil: Seq[Double]) should be(None)
+  }
+
+  "map2" should "return None if any of the args is None" in {
+    map2(Some(1), None)(max) should be (None)
+    map2(None, Some(2))(max) should be (None)
+  }
+
+  "map2" should "return the result when both args are some" in {
+    map2(Some(1), Some(2))(max) should be (Some(2))
+  }
+
+  "insuranceRateQuote" should "return the sum of the args" in {
+    insuranceRateQuote(1, 2) should be (3)
+  }
+
+  "parseInsuranceRateQuote" should "return None when passed invalid numbers" in {
+    parseInsuranceRateQuote("a", "2") should be (None)
+  }
+
+  "parseInsuranceRateQuote" should "return the value wrapped in an option when passed valid numbers" in {
+    parseInsuranceRateQuote("1", "2") should be (Some(3))
   }
 }

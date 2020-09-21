@@ -34,4 +34,25 @@ object Chapter_4 {
     mean(xs) flatMap (
         m => mean(xs.map(x => math.pow(x - m, 2)))
     )
+
+  def map2[A,B,C](a: Option[A], b: Option[B])(f: (A,B) => C): Option[C] = (a, b) match {
+    case (Some(a), Some(b)) => Some(f(a, b))
+    case _ => None
+  }
+
+  // business function
+  def insuranceRateQuote(age: Int, numberOfSpeedingTickets: Int): Double =
+    age + numberOfSpeedingTickets;
+
+  // service function called by some sort of controller or handler
+  def parseInsuranceRateQuote(age: String, numberOfSpeedingTickets: String): Option[Double] = {
+    val optAge: Option[Int] = Try(age.toInt)
+    val optTickets: Option[Int] = Try(numberOfSpeedingTickets.toInt)
+    map2(optAge, optTickets)(insuranceRateQuote)
+  }
+
+  def Try[A](a: => A): Option[A] =
+    try Some(a)
+    catch { case e: Exception => None }
+
 }
