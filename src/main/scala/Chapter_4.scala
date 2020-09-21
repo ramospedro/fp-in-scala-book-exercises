@@ -35,10 +35,8 @@ object Chapter_4 {
         m => mean(xs.map(x => math.pow(x - m, 2)))
     )
 
-  def map2[A,B,C](a: Option[A], b: Option[B])(f: (A,B) => C): Option[C] = (a, b) match {
-    case (Some(a), Some(b)) => Some(f(a, b))
-    case _ => None
-  }
+  def map2[A,B,C](a: Option[A], b: Option[B])(f: (A,B) => C): Option[C] =
+    a flatMap(aa => b map (bb => f(aa, bb)))
 
   // business function
   def insuranceRateQuote(age: Int, numberOfSpeedingTickets: Int): Double =
