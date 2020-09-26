@@ -75,6 +75,11 @@ class Chapter_4Test extends AnyFlatSpec with Matchers {
     map2(Some(1), Some(2))(max) should be (Some(2))
   }
 
+  "map3" should "return the result when both args are some" in {
+    var sum3 = (a: Int, b: Int, c: Int) => a + b + c
+    map3(Some(1), Some(2), Some(3))(sum3) should be (Some(6))
+  }
+
   "insuranceRateQuote" should "return the sum of the args" in {
     insuranceRateQuote(1, 2) should be (3)
   }

@@ -38,6 +38,9 @@ object Chapter_4 {
   def map2[A,B,C](a: Option[A], b: Option[B])(f: (A,B) => C): Option[C] =
     a flatMap(aa => b map (bb => f(aa, bb)))
 
+  def map3[A,B,C,D](a: Option[A], b: Option[B], c: Option[C])(f: (A,B,C) => D): Option[D] =
+    a flatMap(aa => b flatMap(bb => c map (cc => f(aa, bb, cc))))
+
   // business function
   def insuranceRateQuote(age: Int, numberOfSpeedingTickets: Int): Double =
     age + numberOfSpeedingTickets;
